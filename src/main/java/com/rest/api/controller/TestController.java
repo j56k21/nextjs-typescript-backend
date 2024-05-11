@@ -37,18 +37,7 @@ public class TestController {
         map.put("16", "2");
         map.put("17", "2");
         list.add(map);
-        System.out.println("ㅒㅒㅒㅒㅒㅒㅒㅒㅒㅒㅒㅒㅒㅒㅒㅒㅒ");
         return list;
     }
 
-    @GetMapping(value = "/")
-    public void test1(){
-        System.out.println("11111111111111111111111111111");
-        System.out.println("11111111111111111111111111111");
-        System.out.println("11111111111111111111111111111");
-        System.out.println("11111111111111111111111111111");
-        System.out.println("11111111111111111111111111111");
-        System.out.println("11111111111111111111111111111");
-        System.out.println("11111111111111111111111111111");
-    }
 }
