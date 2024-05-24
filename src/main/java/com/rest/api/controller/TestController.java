@@ -1,43 +1,34 @@
 package com.rest.api.controller;
 
+import com.rest.api.service.TestService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
+@Slf4j
 public class TestController {
+    private final TestService service;
 
-    @GetMapping(value = "/test")
-    public List<Map<String, Object>> test(){
-        List<Map<String, Object>> list = new ArrayList<>();
-        Map<String, Object> map = new HashMap<>();
-        map.put("1", "2");
-        map.put("2", "2");
-        map.put("3", "2");
-        map.put("4", "2");
-        map.put("5", "2");
-        map.put("6", "2");
-        map.put("7", "2");
-        map.put("8", "2");
-        map.put("9", "2");
-        map.put("10", "2");
-        map.put("11", "2");
-        map.put("12", "2");
-        map.put("13", "2");
-        map.put("14", "2");
-        map.put("15", "2");
-        map.put("16", "2");
-        map.put("17", "2");
-        list.add(map);
-        return list;
+
+    @GetMapping("/push/public/key")
+    public Map<String, String> getPushPublicKey(){
+        Map<String, String> rtnMap = new HashMap<>();
+        rtnMap.put("publicKey", service.getPushPublicKey());
+        return rtnMap;
+    }
+
+    @PostMapping("/push")
+    public void pushApi(){
+        service.pushApi();
     }
 
 }
