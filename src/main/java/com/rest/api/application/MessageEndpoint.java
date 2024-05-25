@@ -5,6 +5,8 @@ import dev.hilla.Endpoint;
 import dev.hilla.Nonnull;
 import nl.martijndwars.webpush.Subscription;
 
+import java.util.Map;
+
 @Endpoint
 @AnonymousAllowed
 public class MessageEndpoint {
@@ -19,10 +21,16 @@ public class MessageEndpoint {
     }
 
     public void subscribe(Subscription subscription) {
+
+
         messageService.subscribe(subscription);
     }
 
     public void unsubscribe(String endpoint) {
         messageService.unsubscribe(endpoint);
+    }
+
+    public void sendNotifications(Map<String, String> paramMap){
+        messageService.sendNotifications(paramMap);
     }
 }

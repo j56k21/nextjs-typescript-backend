@@ -53,6 +53,15 @@
 			<scope>provided</scope>
 		</dependency>
 
+
+		<!--jdbc -->
+		<dependency>
+			<groupId>thirdparty.oracle</groupId>
+			<artifactId>ojdbc8</artifactId>
+			<version>19.3.0.0</version>
+			<scope>runtime</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>nl.martijndwars</groupId>
 			<artifactId>web-push</artifactId>

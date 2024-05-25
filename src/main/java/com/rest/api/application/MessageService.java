@@ -18,6 +18,7 @@ import java.security.Security;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
@@ -35,14 +36,17 @@ public class MessageService {
     private PushService pushService;
     private List<Subscription> subscriptions = new ArrayList<>();
 
+
     @PostConstruct
-    private void init() throws GeneralSecurityException {
+    public void init() throws GeneralSecurityException {
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>> init");
         Security.addProvider(new BouncyCastleProvider());
         pushService = new PushService(publicKey, privateKey);
     }
 
     public void subscribe(Subscription subscription) {
         System.out.println("Subscribed to " + subscription.endpoint);
+
         this.subscriptions.add(subscription);
     }
 
@@ -62,16 +66,19 @@ public class MessageService {
     }
 
     @Scheduled(fixedRate = 15000)
-    private void sendNotifications() {
+    public void sendNotifications(Map<String, String> paramMap) {
         var json = """
         {
-          "title": "Web Push Test.",
-          "body": "Test Message- %s"
+          "title": "%s",
+          "body": "%s - %s"
         }
         """;
 
         subscriptions.forEach(subscription -> {
-            sendNotification(subscription, String.format(json, LocalTime.now()));
+            sendNotification(subscription, String.format(json
+                    , paramMap.get("title")
+                    , paramMap.get("message")
+                    , LocalTime.now()));
         });
     }
 }
